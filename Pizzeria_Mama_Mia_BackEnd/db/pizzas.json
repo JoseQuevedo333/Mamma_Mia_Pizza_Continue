@@ -1,0 +1,50 @@
+[
+  {
+    "desc": "La pizza napolitana, de masa tierna y delgada pero bordes altos, es la versión propia de la cocina napolitana de la pizza redonda. El término pizza napoletana, por su importancia histórica o regional, se emplea en algunas zonas como sinónimo de pizza tonda.",
+    "id": "p001",
+    "img": "https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-1239077_640_cl.jpg?alt=media&token=6a9a33da-5c00-49d4-9080-784dcc87ec2c",
+    "ingredients": ["mozzarella", "tomates", "jamón", "orégano"],
+    "name": "napolitana",
+    "price": 5950
+  },
+  {
+    "desc": "Una pizza llena de sabor con chorizo español, aceitunas y pimientos, combinados sobre una base crujiente con salsa de tomate y queso derretido, ofreciendo un toque ahumado y especiado irresistible.",
+    "id": "p002",
+    "img": "https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fcheese-164872_640_com.jpg?alt=media&token=18b2b821-4d0d-43f2-a1c6-8c57bc388fab",
+    "ingredients": ["mozzarella", "tomates", "jamón", "choricillo"],
+    "name": "española",
+    "price": 7250
+  },
+  {
+    "desc": "Clásica y deliciosa, esta pizza lleva rodajas de salame, queso mozzarella fundido y una base de salsa de tomate que realza su sabor intenso y ligeramente picante, perfecta para los amantes de los embutidos.",
+    "id": "p003",
+    "img": "https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-1239077_640_com.jpg?alt=media&token=e7cde87a-08d5-4040-ac54-90f6c31eb3e3",
+    "ingredients": ["mozzarella", "tomates", "salame", "orégano"],
+    "name": "salame",
+    "price": 5990
+  },
+  {
+    "desc": "Una combinación única que divide la pizza en cuatro secciones, cada una con ingredientes distintos: jamón, champiñones, aceitunas y alcachofas, ofreciendo una experiencia variada en cada bocado.",
+    "id": "p004",
+    "img": "https://images.unsplash.com/photo-1681567604770-0dc826c870ae?q=80&w=1500&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    "ingredients": ["mozzarella", "salame", "aceitunas", "champiñones"],
+    "name": "cuatro estaciones",
+    "price": 9590
+  },
+  {
+    "desc": "El inconfundible sabor del bacon ahumado y crujiente se mezcla con una generosa capa de queso derretido y salsa de tomate, creando una pizza con un equilibrio perfecto entre lo salado y lo cremoso.",
+    "id": "p005",
+    "img": "https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-salame.jpg?alt=media&token=ab3d4bf8-01f2-4810-982b-bd7fb6b517b2",
+    "ingredients": ["mozzarella", "tomates cherry", "bacon", "orégano"],
+    "name": "bacon",
+    "price": 6450
+  },
+  {
+    "desc": "Para los amantes de los sabores intensos, esta pizza combina jugosos trozos de pollo marinados en especias picantes, queso mozzarella fundido y un toque de chile, logrando un bocado lleno de sabor y calor.",
+    "id": "p006",
+    "img": "https://firebasestorage.googleapis.com/v0/b/apis-varias-mias.appspot.com/o/pizzeria%2Fpizza-2000595_640_c.jpg?alt=media&token=61325b6e-a1e0-441e-b3b5-7335ba13e8be",
+    "ingredients": ["mozzarella", "pimientos", "pollo grillé", "orégano"],
+    "name": "pollo picante",
+    "price": 8500
+  }
+]
