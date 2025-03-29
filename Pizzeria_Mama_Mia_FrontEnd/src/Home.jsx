@@ -1,17 +1,31 @@
 import React from "react";
 import Header from "./Header";
-import Pizza from "./Pizza";
+import Pizza001 from "./Pizza001";
 import "./components/css/Home.css";
 
 function Home() {
   return (
-    <div>
+    <div className="d-flex flex-column min-vh-100">
       <Header />
-      <div className="container">
-        <h1>Nuestras Pizzas</h1>
 
-        <Pizza />
-      </div>
+      <main className="flex-grow-1 py-4">
+        <div className="container">
+          <div className="row justify-content-center">
+            <div className="text-center mb-5">
+              <h1 className="badge bg-danger" style={{ fontSize: "3rem" }}>
+                Nuestras Pizzas
+              </h1>
+              <p className="lead text-muted">
+                Descubre nuestra deliciosa selección de pizzas artesanales
+              </p>
+            </div>
+
+            <div className="shadow-sm rounded-4 overflow-hidden">
+              <Pizza001 />
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
   );
 }

@@ -16,28 +16,26 @@ function Navbar() {
         </Link>
 
         <div className="d-flex">
-          {token ? (
-            <>
-              <button className="btn btn-outline-success me-2">
-                🔓 Profile
-              </button>
-              <button className="btn btn-outline-danger me-2">🔒 Logout</button>
-            </>
-          ) : (
-            <>
-              <Link to="/LoginSheet" className="btn btn-outline-primary me-2">
-                🔐 Login
-              </Link>
+          <>
+            <Link to="/Profile" as={Link} className="btn btn-outline-success me-2">🔓 Profile</Link>
+            <button className="btn btn-outline-danger me-2">🔒 Logout</button>
+          </>
 
-              <Link
-                to="/RegisterSheet"
-                className="btn btn-outline-secondary me-2"
-              >
-                🔐 Register
-              </Link>
-            </>
-          )}
-          <Link to="/CartSheet" className="btn btn-outline-warning">
+          <>
+            <Link to="/LoginSheet" as={Link} className="btn btn-outline-primary me-2">
+              🔐 Login
+            </Link>
+
+            <Link
+              to="/RegisterSheet"
+              as={Link}
+              className="btn btn-outline-secondary me-2"
+            >
+              🔐 Register
+            </Link>
+          </>
+
+          <Link to="/CartSheet" as={Link} className="btn btn-outline-warning">
             🛒 Carrito
           </Link>
         </div>
