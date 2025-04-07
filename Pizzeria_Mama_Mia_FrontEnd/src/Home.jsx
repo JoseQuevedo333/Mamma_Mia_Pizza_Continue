@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "./Header";
-import Pizza001 from "./Pizza001";
+import Pizzas from "./Pizzas";
 import "./components/css/Home.css";
 
 function Home() {
@@ -15,13 +15,10 @@ function Home() {
               <h1 className="badge bg-danger" style={{ fontSize: "3rem" }}>
                 Nuestras Pizzas
               </h1>
-              <p className="lead text-muted">
-                Descubre nuestra deliciosa selección de pizzas artesanales
-              </p>
             </div>
 
             <div className="shadow-sm rounded-4 overflow-hidden">
-              <Pizza001 />
+              <Pizzas />
             </div>
           </div>
         </div>

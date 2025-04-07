@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "./context/CartContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./components/css/App.css";
 
@@ -8,15 +9,15 @@ const Pizzas = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [search, setSearch] = useState("");
+  const { cart, addToCart, remove, increase, decrease } =
+    useContext(CartContext);
 
   const url = "http://localhost:5000/api/pizzas";
 
   const getData = async () => {
     try {
       const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error("Failed to fetch data");
-      }
+      if (!response.ok) throw new Error("Failed to fetch data");
       const data = await response.json();
       setPizzas(data);
     } catch (error) {
@@ -34,11 +35,18 @@ const Pizzas = () => {
     setSearch(e.target.value);
   };
 
+  const isInCart = (id) => cart.some((item) => item.id === id);
+
   const results = search
     ? pizzas.filter((pizza) =>
         pizza.name.toLowerCase().includes(search.toLowerCase())
       )
     : pizzas;
+
+  const getPizzaQuantity = (id) => {
+    const pizza = cart.find((item) => item.id === id);
+    return pizza ? pizza.quantity : 0;
+  };
 
   if (loading) {
     return (
@@ -93,6 +101,9 @@ const Pizzas = () => {
                             alt={pizza.name}
                             className="img-fluid rounded"
                             style={{ maxHeight: "80px" }}
+                            onError={(e) => {
+                              e.target.src = "https://via.placeholder.com/80";
+                            }}
                           />
                         </div>
                         <div className="col-md-3">
@@ -114,13 +125,42 @@ const Pizzas = () => {
                           </span>
                         </div>
                         <div className="col-md-1 text-end">
-                          <Link
-                            to="/CartSheet"
-                            as={Link}
-                            className="btn btn-sm btn-success"
-                          >
-                            Order
-                          </Link>
+                          <div className="d-flex flex-wrap justify-content-around">
+                            <button
+                              className="btn btn-sm btn-success"
+                              onClick={() => addToCart(pizza)}
+                            >
+                              Añadir
+                            </button>
+
+                            {getPizzaQuantity(pizza.id) > 0 && (
+                              <button
+                                className="btn btn-sm btn-outline-danger"
+                                onClick={() => remove(pizza.id)}
+                              >
+                                Quitar
+                              </button>
+                            )}
+                            <div className="d-flex justify-content-around">
+                              {getPizzaQuantity(pizza.id) > 0 && (
+                                <button
+                                  className="btn btn-sm btn-outline-warning"
+                                  onClick={() => increase(pizza.id)}
+                                >
+                                  +
+                                </button>
+                              )}
+
+                              {getPizzaQuantity(pizza.id) > 1 && (
+                                <button
+                                  className="btn btn-sm btn-outline-secondary"
+                                  onClick={() => decrease(pizza.id)}
+                                >
+                                  -
+                                </button>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -129,7 +169,7 @@ const Pizzas = () => {
               ) : (
                 <div className="text-center p-5">
                   <h4>No pizzas found</h4>
-                  <Link to="/" as={Link} className="btn btn-outline-dark mt-3">
+                  <Link to="/" className="btn btn-outline-dark mt-3">
                     Home
                   </Link>
                 </div>

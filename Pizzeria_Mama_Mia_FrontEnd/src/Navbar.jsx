@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { CartContext } from "./context/CartContext";
 
 function Navbar() {
-  const token = false;
+  const { total } = useContext(CartContext);
 
   const formatTotal = (amount) => {
-    return amount.toLocaleString();
+    return amount.toLocaleString("es-CL", {
+      style: "currency",
+      currency: "CLP",
+      minimumFractionDigits: 0,
+    });
   };
 
   return (
@@ -17,26 +22,21 @@ function Navbar() {
 
         <div className="d-flex">
           <>
-            <Link to="/Profile" as={Link} className="btn btn-outline-success me-2">🔓 Profile</Link>
+            <Link to="/Profile" className="btn btn-outline-success me-2">🔓 Profile</Link>
             <button className="btn btn-outline-danger me-2">🔒 Logout</button>
           </>
 
           <>
-            <Link to="/LoginSheet" as={Link} className="btn btn-outline-primary me-2">
+            <Link to="/LoginSheet" className="btn btn-outline-primary me-2">
               🔐 Login
             </Link>
-
-            <Link
-              to="/RegisterSheet"
-              as={Link}
-              className="btn btn-outline-secondary me-2"
-            >
+            <Link to="/RegisterSheet" className="btn btn-outline-secondary me-2">
               🔐 Register
             </Link>
           </>
 
-          <Link to="/CartSheet" as={Link} className="btn btn-outline-warning">
-            🛒 Carrito
+          <Link to="/CartSheet" className="btn btn-outline-warning">
+            🛒 Carrito {total > 0 && <span className="ms-1">({formatTotal(total)})</span>}
           </Link>
         </div>
       </div>
