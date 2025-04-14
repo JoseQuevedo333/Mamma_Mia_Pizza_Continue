@@ -2,8 +2,10 @@ import React, { useEffect, useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./components/css/App.css";
 import { CartContext } from "./context/CartContext";
+import { UserContext } from "./context/UserContext";
 
 function Cart() {
+  const { token } = useContext(UserContext);
   const [pizzas, setPizzas] = useState([]);
   const [loading, setLoading] = useState(true);
   const { cart, addToCart, increase, decrease, remove, total } = useContext(CartContext);
@@ -108,7 +110,7 @@ function Cart() {
             {cart.length > 0 && (
               <div className="card-footer d-flex justify-content-between">
                 <h4>Total: ${total.toFixed(2)}</h4>
-                <button className="btn btn-success">Pagar</button>
+                <button disabled={!token} className="btn btn-success">Pagar</button>
               </div>
             )}
           </div>

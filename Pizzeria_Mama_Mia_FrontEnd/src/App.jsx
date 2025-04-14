@@ -1,6 +1,9 @@
 import React from "react";
+import { useContext } from "react";
+import { UserContext } from "./context/UserContext";
 import "./components/css/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Navigate, Routes, Route } from "react-router-dom";
 import Navbar from "./Navbar";
 import Home from "./Home";
 import Footer from "./Footer";
@@ -9,19 +12,35 @@ import LoginPage from "./LoginPage";
 import Cart from "./Cart";
 import NotFoundPage from "./NotFoundPage";
 import Profile from "./Profile";
+import Pizza from "./Pizza";
 import Pizzas from "./Pizzas";
-import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
+  const { token } = useContext(UserContext);
   return (
     <div>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/RegisterSheet" element={<RegisterPage />} />{" "}
-        <Route path="/LoginSheet" element={<LoginPage />} />{" "}
+        <Route path="/pizza/:id" element={<Pizza />} />
+        <Route
+          path="/RegisterSheet"
+          element={token ? <Navigate to="/" /> : <RegisterPage />}
+        />{" "}
+        <Route
+          path="/LoginSheet"
+          element={token ? <Navigate to="/" /> : <LoginPage />}
+        />{" "}
         <Route path="/CartSheet" element={<Cart />} />{" "}
-        <Route path="/Profile" element={<Profile />} />{" "}
+        <Route
+          path="/Profile"
+          element={
+            <ProtectedRoute>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />{" "}
         <Route path="*" element={<NotFoundPage />} />{" "}
         <Route
           path="/logout"

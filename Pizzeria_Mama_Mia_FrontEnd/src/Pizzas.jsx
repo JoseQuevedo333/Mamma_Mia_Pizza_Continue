@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { CartContext } from "./context/CartContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./components/css/App.css";
+import Pizza from "./Pizza";
 
 const Pizzas = () => {
   const [pizzas, setPizzas] = useState([]);
@@ -123,6 +124,12 @@ const Pizzas = () => {
                           <span className="badge bg-danger fs-5">
                             ${pizza.price}
                           </span>
+                          <Link
+                            to={`/pizza/${pizza.id}`}
+                            className="btn btn-sm btn-primary"
+                          >
+                            Ver más
+                          </Link>
                         </div>
                         <div className="col-md-1 text-end">
                           <div className="d-flex flex-wrap justify-content-around">
