@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 function Profile() {
+  const { user, logout } = useUser();
   return (
     <div className="container py-5">
       <div className="row justify-content-center">

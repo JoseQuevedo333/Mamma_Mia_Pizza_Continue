@@ -3,6 +3,7 @@ import Header from "./Header";
 import Pizzas from "./Pizzas";
 import "./components/css/Home.css";
 
+
 function Home() {
   return (
     <div className="d-flex flex-column min-vh-100">

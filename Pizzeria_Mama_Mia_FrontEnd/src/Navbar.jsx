@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
 import { CartContext } from "./context/CartContext";
-import { UserContext } from "./context/UserContext";
+import { useUser } from "./context/UserContext";
 
 function Navbar() {
   const { total } = useContext(CartContext);
-  const { token, logout } = useContext(UserContext);
+  const { token, logout } = useUser();
 
   const formatTotal = (amount) => {
     return amount.toLocaleString("es-CL", {

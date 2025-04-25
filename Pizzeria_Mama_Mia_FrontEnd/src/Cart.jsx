@@ -2,14 +2,16 @@ import React, { useEffect, useState, useContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./components/css/App.css";
 import { CartContext } from "./context/CartContext";
-import { UserContext } from "./context/UserContext";
+import { useUser } from "./context/UserContext";
 
 function Cart() {
-  const { token } = useContext(UserContext);
+  const { token } = useUser();
   const [pizzas, setPizzas] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { cart, addToCart, increase, decrease, remove, total } = useContext(CartContext);
+  const { cart, addToCart, increase, decrease, remove, total } =
+    useContext(CartContext);
 
+ 
   useEffect(() => {
     const fetchPizzas = async () => {
       try {
@@ -38,6 +40,7 @@ function Cart() {
 
   return (
     <div className="container my-5">
+      
       <div className="row mb-5">
         <div className="col-lg-10 mx-auto">
           <div className="card shadow border border-3 border-dark">
@@ -110,7 +113,9 @@ function Cart() {
             {cart.length > 0 && (
               <div className="card-footer d-flex justify-content-between">
                 <h4>Total: ${total.toFixed(2)}</h4>
-                <button disabled={!token} className="btn btn-success">Pagar</button>
+                <button disabled={!token} className="btn btn-success">
+                  Pagar
+                </button>
               </div>
             )}
           </div>

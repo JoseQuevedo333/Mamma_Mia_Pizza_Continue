@@ -1,6 +1,6 @@
 import React from "react";
 import { useContext } from "react";
-import { UserContext } from "./context/UserContext";
+import { useUser } from "./context/UserContext";
 import "./components/css/App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Navigate, Routes, Route } from "react-router-dom";
@@ -17,7 +17,8 @@ import Pizzas from "./Pizzas";
 import ProtectedRoute from "./ProtectedRoute";
 
 function App() {
-  const { token } = useContext(UserContext);
+  const { token } = useUser();
+
   return (
     <div>
       <Navbar />

@@ -1,12 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUser } from "./context/UserContext";
 
 const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
-  const validarDatos = (e) => {
+  const { register } = useUser();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email.trim() || !password.trim() || !confirmPassword.trim()) {
@@ -25,15 +30,26 @@ const RegisterPage = () => {
     }
 
     setError("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
+
+    try {
+      await register(email, password);
+      navigate("/profile");
+
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+    } catch (err) {
+      setError(err.message || "Error al registrar");
+    }
   };
 
   return (
     <>
-      <form className="register border border-3 border-dark" onSubmit={validarDatos}>
-        {error && <p>{error}</p>}
+      <form
+        className="register border border-3 border-dark"
+        onSubmit={handleSubmit}
+      >
+        {error && <p className="text-danger">{error}</p>}
         <div className="register-form">
           <label>Email</label>
           <input
