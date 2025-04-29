@@ -15,6 +15,7 @@ import Profile from "./Profile";
 import Pizza from "./Pizza";
 import Pizzas from "./Pizzas";
 import ProtectedRoute from "./ProtectedRoute";
+import Logout from "./Logout";
 
 function App() {
   const { token } = useUser();
@@ -43,10 +44,7 @@ function App() {
           }
         />{" "}
         <Route path="*" element={<NotFoundPage />} />{" "}
-        <Route
-          path="/logout"
-          element={() => localStorage.removeItem("token")}
-        />{" "}
+        <Route path="/logout" element={<Logout />} />
         <Route path="/pizzas" element={<Pizzas />} />{" "}
       </Routes>
       <Footer />

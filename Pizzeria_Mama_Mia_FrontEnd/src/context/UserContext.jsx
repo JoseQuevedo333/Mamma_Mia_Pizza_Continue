@@ -13,6 +13,8 @@ export function UserProvider({ children }) {
     }
   });
 
+ const isLoggedIn = !!user.token;
+
   useEffect(() => {
     try {
       localStorage.setItem("user", JSON.stringify(user));
@@ -60,8 +62,7 @@ export function UserProvider({ children }) {
     return data;
   };
 
-  return (
-    <UserContext.Provider value={{ user, login, register, logout, getProfile }}>
+  return (   <UserContext.Provider value={{ user, isLoggedIn, login, register, logout, getProfile }}>
       {children}
     </UserContext.Provider>
   );

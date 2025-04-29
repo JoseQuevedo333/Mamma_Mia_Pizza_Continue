@@ -5,13 +5,12 @@ import { CartContext } from "./context/CartContext";
 import { useUser } from "./context/UserContext";
 
 function Cart() {
-  const { token } = useUser();
+  const { user } = useUser();
   const [pizzas, setPizzas] = useState([]);
   const [loading, setLoading] = useState(true);
   const { cart, addToCart, increase, decrease, remove, total } =
     useContext(CartContext);
 
- 
   useEffect(() => {
     const fetchPizzas = async () => {
       try {
@@ -38,9 +37,42 @@ function Cart() {
     );
   }
 
+  const handleCheckout = async () => {
+    if (!user.token) {
+      alert("Debes iniciar sesión para comprar");
+      return;
+    }
+
+    const checkoutData = {
+      cart,
+      total,
+    };
+
+    try {
+      const response = await fetch("http://localhost:5000/api/checkouts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${user.token}`,
+        },
+        body: JSON.stringify(checkoutData),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        alert("Compra realizada exitosamente!");
+      } else {
+        throw new Error(data.message || "Error al realizar la compra");
+      }
+    } catch (error) {
+      console.error("Error during checkout:", error);
+      alert("Hubo un error al procesar la compra.");
+    }
+  };
+
   return (
     <div className="container my-5">
-      
       <div className="row mb-5">
         <div className="col-lg-10 mx-auto">
           <div className="card shadow border border-3 border-dark">
@@ -113,7 +145,11 @@ function Cart() {
             {cart.length > 0 && (
               <div className="card-footer d-flex justify-content-between">
                 <h4>Total: ${total.toFixed(2)}</h4>
-                <button disabled={!token} className="btn btn-success">
+                <button
+                  disabled={!user.token}
+                  className="btn btn-success"
+                  onClick={handleCheckout}
+                >
                   Pagar
                 </button>
               </div>

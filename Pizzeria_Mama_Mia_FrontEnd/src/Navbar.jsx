@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { CartContext } from "./context/CartContext";
 import { useUser } from "./context/UserContext";
+import { useNavigate } from "react-router-dom";
 
 function Navbar() {
   const { total } = useContext(CartContext);
-  const { token, logout } = useUser();
+  const { user, logout } = useUser();
+  const navigate = useNavigate();
 
   const formatTotal = (amount) => {
     return amount.toLocaleString("es-CL", {
@@ -23,15 +25,23 @@ function Navbar() {
         </NavLink>
 
         <div className="d-flex">
-          {token ? (
+          {user.token ? (
             <>
               <NavLink to="/Profile" className="btn btn-outline-success me-2">
                 🔓 Profile
               </NavLink>
 
-              <button onClick={logout} className="btn btn-outline-danger me-2">
+              <NavLink
+                to="/logout"
+                onClick={(e) => {
+                  e.preventDefault();
+                  logout();
+                  navigate("/logout");
+                }}
+                className="btn btn-outline-danger me-2"
+              >
                 🔒 Logout
-              </button>
+              </NavLink>
             </>
           ) : (
             <>

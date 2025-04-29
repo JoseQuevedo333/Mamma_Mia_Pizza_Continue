@@ -27,7 +27,7 @@ const LoginPage = () => {
       setError("");
       setEmail("");
       setPassword("");
-      navigate("/profile");
+      navigate("/profile/");
     } catch (err) {
       setError(err.message || "Error al iniciar sesión");
     }

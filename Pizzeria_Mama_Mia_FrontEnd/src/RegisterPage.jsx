@@ -58,6 +58,7 @@ const RegisterPage = () => {
             className="register-control row align-items-center"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            
           />
         </div>
         <div className="register-form">

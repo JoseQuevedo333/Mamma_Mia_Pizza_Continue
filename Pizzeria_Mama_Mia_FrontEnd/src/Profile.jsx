@@ -1,49 +1,54 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import { Profiler, useEffect, useState } from "react";
+import { useUser } from "./context/UserContext";
 
-function Profile() {
-  const { user, logout } = useUser();
+const Profile = () => {
+  const { getProfile, logout } = useUser();
+  const [profile, setProfile] = useState(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const loadProfile = async () => {
+      try {
+        const data = await getProfile();
+        setProfile(data);
+      } catch (err) {
+        setError(err.message || "Error al cargar perfil");
+      }
+    };
+    loadProfile();
+  }, [getProfile]);
+
+  if (error) {
+    return (
+      <div className="profile border border-3 border-danger p-4">
+        <p className="text-danger">{error}</p>
+      </div>
+    );
+  }
+
+  if (!profile) {
+    return (
+      <div className="profile border border-3 border-dark p-4">
+        <p>Cargando perfil...</p>
+      </div>
+    );
+  }
+
   return (
-    <div className="container py-5">
-      <div className="row justify-content-center">
-        <div className="col-lg-8">
-          <div className="card shadow-lg border border-3 border-dark mb-5">
-            <div className="card-header bg-dark text-white">
-              <h2 className="mb-0">Tu Perfil</h2>
-            </div>
+    <div className="profile border border-3 border-dark p-4">
+      <h1 className="mb-4">Bienvenido, {profile.email}</h1>
 
-            <div className="card-body p-4 text-center">
-              <div className="mb-4">
-                <i className="fas fa-user-circle fa-5x text-secondary mb-3"></i>
-                <h1 className="display-4 fw-bold mb-2">José Antonio Quevedo</h1>
-                <a
-                  href="mailto:joseaquevedo@mimail.com"
-                  className="d-inline-flex align-items-center text-decoration-none fs-3"
-                  style={{ color: "#0d6efd" }}
-                >
-                  <i className="fas fa-envelope me-2"></i>
-                  joseaquevedo@mimail.com
-                </a>
-              </div>
-
-              <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
-                <Link to="/" className="btn btn-danger px-4 py-2">
-                  <i className="fas fa-sign-out-alt me-2"></i>
-                  Cerrar Sesión
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          <div className="card shadow-lg border border-3 border-dark">
-            <div className="card-header bg-dark text-white">
-              <h2 className="mb-0">Tus Pedidos Recientes</h2>
-            </div>
-          </div>
+      <div className="row mb-3">
+        <div className="col">
+          <strong>ID:</strong> {profile.id}
         </div>
       </div>
+
+      <button onClick={logout} className="btn btn-danger mt-3">
+        Cerrar sesión
+      </button>
     </div>
   );
-}
+};
 
 export default Profile;
